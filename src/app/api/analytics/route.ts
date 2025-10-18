@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
     const churnRate = totalSubscriptions > 0 ? ((cancelledSubscriptions / totalSubscriptions) * 100).toFixed(1) : 0
     
     // Get revenue data for the last 6 months
-    const revenueData = []
+    const revenueData: Array<{ month: string; revenue: number }> = []
     for (let i = 5; i >= 0; i--) {
       const monthStart = new Date(now.getFullYear(), now.getMonth() - i, 1)
       const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0)

@@ -16,7 +16,7 @@ const subscriptionSchema = z.object({
   customerId: z.string().min(1, 'Customer is required'),
   productId: z.string().min(1, 'Product is required'),
   startDate: z.string().min(1, 'Start date is required'),
-  autoRenew: z.boolean().default(true),
+  autoRenew: z.boolean(),
   notes: z.string().optional()
 })
 

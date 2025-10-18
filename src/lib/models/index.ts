@@ -11,8 +11,17 @@ export {
 }
 
 export type {
-  ICustomer,
-  IProduct,
-  ISubscription,
-  IInvoice
+  ICustomer
 } from './Customer'
+
+export type {
+  IProduct
+} from './Product'
+
+export type {
+  ISubscription
+} from './Subscription'
+
+export type {
+  IInvoice
+} from './Invoice'

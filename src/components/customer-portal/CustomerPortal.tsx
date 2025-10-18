@@ -450,7 +450,7 @@ export function CustomerPortal() {
                       <div className="flex items-center justify-between text-sm text-muted-foreground">
                         <span>Next billing: {formatDate(subscription.nextBillingDate)}</span>
                         <div className="flex gap-2">
-                          {subscription.status === 'active' && (
+                          {(subscription.status === 'active' || subscription.status === 'paused') && (
                             <>
                               <Button 
                                 variant="outline" 

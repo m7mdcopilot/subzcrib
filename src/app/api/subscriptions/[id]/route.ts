@@ -2,14 +2,19 @@ import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/mongodb'
 import { Subscription } from '@/lib/models'
 
+interface RouteParams {
+  params: Promise<{ id: string }>
+}
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: RouteParams
 ) {
   try {
+    const { id } = await context.params
     await connectDB()
     
-    const subscription = await Subscription.findById(params.id)
+    const subscription = await Subscription.findById(id)
       .populate('customer')
       .populate('product')
     
@@ -32,15 +37,16 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: RouteParams
 ) {
   try {
+    const { id } = await context.params
     await connectDB()
     
     const body = await request.json()
     
     const subscription = await Subscription.findByIdAndUpdate(
-      params.id,
+      id,
       body,
       { new: true }
     ).populate('customer').populate('product')
@@ -64,12 +70,13 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: RouteParams
 ) {
   try {
+    const { id } = await context.params
     await connectDB()
     
-    const subscription = await Subscription.findByIdAndDelete(params.id)
+    const subscription = await Subscription.findByIdAndDelete(id)
     
     if (!subscription) {
       return NextResponse.json(
