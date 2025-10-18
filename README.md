@@ -1,16 +1,20 @@
-<<<<<<< HEAD
-# 🚀 Welcome to Z.ai Code Scaffold
+# 🚀 subzcrib.com - Subscription Management System
 
-A modern, production-ready web application scaffold powered by cutting-edge technologies, designed to accelerate your development with [Z.ai](https://chat.z.ai)'s AI-powered coding assistance.
+A modern, production-ready subscription management system built with cutting-edge technologies, designed for businesses operating on a recurring revenue model.
 
 ## ✨ Technology Stack
 
-This scaffold provides a robust foundation built with:
+This application provides a robust foundation built with:
 
 ### 🎯 Core Framework
 - **⚡ Next.js 15** - The React framework for production with App Router
 - **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
 - **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
+
+### 🗄️ Database & Backend
+- **🍃 MongoDB** - NoSQL database for scalability and flexibility
+- **🔗 Mongoose** - Elegant MongoDB object modeling for Node.js
+- **🔐 NextAuth.js** - Complete open-source authentication solution
 
 ### 🧩 UI Components & Styling
 - **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
@@ -27,10 +31,6 @@ This scaffold provides a robust foundation built with:
 - **🔄 TanStack Query** - Powerful data synchronization for React
 - **🌐 Axios** - Promise-based HTTP client
 
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation Node.js and TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
-
 ### 🎨 Advanced UI Features
 - **📊 TanStack Table** - Headless UI for building tables and datagrids
 - **🖱️ DND Kit** - Modern drag and drop toolkit for React
@@ -42,13 +42,13 @@ This scaffold provides a robust foundation built with:
 - **📅 Date-fns** - Modern JavaScript date utility library
 - **🪝 ReactUse** - Collection of essential React hooks for modern development
 
-## 🎯 Why This Scaffold?
+## 🎯 Why subzcrib.com?
 
 - **🏎️ Fast Development** - Pre-configured tooling and best practices
 - **🎨 Beautiful UI** - Complete shadcn/ui component library with advanced interactions
 - **🔒 Type Safety** - Full TypeScript configuration with Zod validation
 - **📱 Responsive** - Mobile-first design principles with smooth animations
-- **🗄️ Database Ready** - Prisma ORM configured for rapid backend development
+- **🗄️ MongoDB Ready** - Scalable NoSQL database with Mongoose ODM
 - **🔐 Auth Included** - NextAuth.js for secure authentication flows
 - **📊 Data Visualization** - Charts, tables, and drag-and-drop functionality
 - **🌍 i18n Ready** - Multi-language support with Next Intl
@@ -75,7 +75,7 @@ Open [http://localhost:3000](http://localhost:3000) to see your application runn
 
 ## 🤖 Powered by Z.ai
 
-This scaffold is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
+This application is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
 
 - **💻 Code Generation** - Generate components, pages, and features instantly
 - **🎨 UI Development** - Create beautiful interfaces with AI assistance  
@@ -89,16 +89,29 @@ Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https:
 
 ```
 src/
-├── app/                 # Next.js App Router pages
+├── app/                 # Next.js App Router pages and API routes
+│   └── api/             # REST API endpoints
 ├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
+│   ├── ui/             # shadcn/ui components
+│   ├── analytics/       # Analytics dashboard components
+│   ├── subscriptions/  # Subscription management components
+│   └── customer-portal/ # Customer portal components
 ├── hooks/              # Custom React hooks
 └── lib/                # Utility functions and configurations
+    ├── models/          # MongoDB/Mongoose models
+    └── mongodb.ts      # Database connection
 ```
 
 ## 🎨 Available Features & Components
 
-This scaffold includes a comprehensive set of modern web development tools:
+This application includes a comprehensive set of subscription management features:
+
+### 🧩 Core Business Features
+- **Subscription Management**: Complete CRUD operations for subscriptions
+- **Customer Management**: Customer lifecycle tracking and management
+- **Product Management**: Recurring product catalog with different billing cycles
+- **Invoice Generation**: Automated invoicing and payment tracking
+- **Analytics Dashboard**: MRR, churn rate, and revenue analytics
 
 ### 🧩 UI Components (shadcn/ui)
 - **Layout**: Card, Separator, Aspect Ratio, Resizable Panels
@@ -120,7 +133,7 @@ This scaffold includes a comprehensive set of modern web development tools:
 
 ### 🔐 Backend Integration
 - **Authentication**: Ready-to-use auth flows with NextAuth.js
-- **Database**: Type-safe database operations with Prisma
+- **Database**: Type-safe database operations with MongoDB & Mongoose
 - **API Client**: HTTP requests with Axios + TanStack Query
 - **State Management**: Simple and scalable with Zustand
 
@@ -132,14 +145,33 @@ This scaffold includes a comprehensive set of modern web development tools:
 
 ## 🤝 Get Started with Z.ai
 
-1. **Clone this scaffold** to jumpstart your project
-2. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
-3. **Start building** with intelligent code generation and assistance
-4. **Deploy with confidence** using the production-ready setup
+1. **Clone this repository** to jumpstart your subscription business
+2. **Set up MongoDB** - Configure your MongoDB connection in `.env`
+3. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
+4. **Start building** with intelligent code generation and assistance
+5. **Deploy with confidence** using the production-ready setup
+
+## 🚀 Key Features
+
+### Subscription Management
+- **Recurring Products**: Create and sell products on a recurring basis
+- **Automated Invoicing**: Automatically generate invoices based on subscription cycles
+- **Customer Lifecycle**: Track and manage customer relationships
+- **Contract Management**: Centralized contract creation and renewal
+- **Analytics & Forecasts**: Visualize revenue and predict growth
+
+### Customer Portal
+- **Self-Service**: Customers can manage their own subscriptions
+- **Payment Management**: Secure online payment processing
+- **Information Updates**: Customers can update their billing information
+- **Invoice Access**: Download invoices and receipts
+
+### Analytics & Reporting
+- **MRR Tracking**: Monthly Recurring Revenue monitoring
+- **Churn Analysis**: Customer churn rate tracking
+- **Revenue Forecasts**: Predict future business growth
+- **Customer Insights**: Detailed customer analytics
 
 ---
 
-Built with ❤️ for the developer community. Supercharged by [Z.ai](https://chat.z.ai) 🚀
-=======
-# subzcrib
->>>>>>> c9f3d25904a7f98ab69e454826e3b6b72b3f0fba
+Built with ❤️ for the subscription economy. Supercharged by [Z.ai](https://chat.z.ai) 🚀
