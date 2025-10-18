@@ -4,7 +4,6 @@
 
 ### Prerequisites
 - GitHub repository connected to Vercel
-- MongoDB database connection string
 - Vercel account
 
 ### Step 1: Connect to Vercel
@@ -20,12 +19,11 @@
 In Vercel dashboard, go to **Settings → Environment Variables** and add:
 
 ```bash
-# Required
-MONGODB_URI=mongodb+srv://subzcrib:McaMej2QDkEUrbrM@cluster0.pb97zdx.mongodb.net/subzcrib
-
 # Optional (for production)
 NODE_ENV=production
 ```
+
+**Note**: MongoDB connection is now hardcoded in the codebase, no MONGODB_URI needed.
 
 ### Step 3: Configure Build Settings
 
@@ -33,6 +31,7 @@ The project is now configured for Vercel with:
 - **Build Command**: `npm run build`
 - **Output Directory**: `.next`
 - **Install Command**: `npm install`
+- **Framework**: `nextjs`
 
 ### Step 4: Deploy
 
@@ -45,20 +44,20 @@ Click **"Deploy"** button. Vercel will:
 
 If you see a 404 error, check these:
 
-#### 1. Environment Variables
-Ensure `MONGODB_URI` is correctly set in Vercel dashboard.
-
-#### 2. Build Logs
+#### 1. Build Logs
 Check Vercel build logs for errors:
 - TypeScript errors
 - Missing dependencies
 - Build failures
 
-#### 3. Function Logs
+#### 2. Function Logs
 Check serverless function logs for runtime errors.
 
-#### 4. Domain Configuration
+#### 3. Domain Configuration
 Ensure your domain is properly configured in Vercel.
+
+#### 4. MongoDB Connection
+Verify the MongoDB connection string is correct in the code.
 
 ### 🌍 Production vs Development
 
@@ -83,7 +82,7 @@ npm run start
 
 2. **Socket.IO**: Real-time features via Socket.IO will work differently on Vercel. Consider using Vercel's real-time features or WebSockets.
 
-3. **Database**: MongoDB connection works the same way in both environments.
+3. **Database**: MongoDB connection is now hardcoded in `src/lib/mongodb.ts` for both environments.
 
 4. **Static Assets**: All static files are automatically optimized by Vercel.
 
@@ -115,4 +114,4 @@ After successful deployment:
 **Need Help?**
 - Check Vercel's [documentation](https://vercel.com/docs)
 - Review build logs for specific errors
-- Ensure all environment variables are correctly set
+- Ensure MongoDB connection string is correct in the code
