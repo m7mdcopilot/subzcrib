@@ -41,13 +41,13 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="h-screen overflow-hidden bg-gray-50">
       <MobileNav />
       
-      <div className="flex">
+      <div className="flex h-full">
         <SidebarNav />
         
-        <main className="flex-1 lg:ml-64">
+        <main className="flex-1 lg:ml-64 overflow-y-auto">
           <div className="p-4 lg:p-8">
             {isPortalAdmin && <PortalAdminDashboard />}
             {isMerchant && <MerchantDashboard />}

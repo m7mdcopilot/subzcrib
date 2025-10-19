@@ -286,8 +286,8 @@ export default function MobileNav() {
             </nav>
           </div>
 
-          {/* Fixed User Info */}
-          <div className="p-6 border-t border-gray-200 flex-shrink-0">
+          {/* Fixed User Info - Sticky at bottom */}
+          <div className="sticky bottom-0 p-6 border-t border-gray-200 flex-shrink-0 bg-white/80 backdrop-blur-sm">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button 
