@@ -231,8 +231,8 @@ export default function SidebarNav() {
           </div>
         </div>
 
-        {/* Scrollable Navigation */}
-        <div className="flex-1 overflow-y-auto p-6 sidebar-scrollbar">
+        {/* Navigation - No Scroll */}
+        <div className="flex-1 p-6">
           <nav className="space-y-2">
             {navItems.map((item) => {
               const isActive = pathname === item.href
