@@ -11,6 +11,10 @@ import PortalAdminDashboard from '@/components/analytics/PortalAdminDashboard'
 import MerchantDashboard from '@/components/analytics/MerchantDashboard'
 import CustomerDashboard from '@/components/analytics/CustomerDashboard'
 
+// Layout components
+import SidebarNav from '@/components/layout/SidebarNav'
+import MobileNav from '@/components/layout/MobileNav'
+
 export default function DashboardPage() {
   const { user, isLoading } = useAuth()
   const router = useRouter()
@@ -38,38 +42,19 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-gray-900">subzcrib.com</h1>
-              <span className="ml-4 px-3 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-800">
-                {user.role.replace('_', ' ')}
-              </span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Welcome, {user.name}</span>
-              <Button 
-                variant="outline" 
-                onClick={() => {
-                  localStorage.removeItem('auth_token')
-                  window.location.href = '/login'
-                }}
-              >
-                Logout
-              </Button>
-            </div>
+      <MobileNav />
+      
+      <div className="flex">
+        <SidebarNav />
+        
+        <main className="flex-1 lg:ml-64">
+          <div className="p-4 lg:p-8">
+            {isPortalAdmin && <PortalAdminDashboard />}
+            {isMerchant && <MerchantDashboard />}
+            {isCustomer && <CustomerDashboard />}
           </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        {isPortalAdmin && <PortalAdminDashboard />}
-        {isMerchant && <MerchantDashboard />}
-        {isCustomer && <CustomerDashboard />}
-      </main>
+        </main>
+      </div>
     </div>
   )
 }

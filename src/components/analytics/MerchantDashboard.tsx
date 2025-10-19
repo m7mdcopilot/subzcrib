@@ -319,7 +319,7 @@ export default function MerchantDashboard() {
             </Button>
             <Button className="w-full justify-start" variant="outline">
               <CreditCard className="h-4 w-4 mr-2" />
-              View Subscriptions (B2C)
+              View Subscriptions
             </Button>
             <Button className="w-full justify-start" variant="outline">
               <DollarSign className="h-4 w-4 mr-2" />
@@ -327,7 +327,7 @@ export default function MerchantDashboard() {
             </Button>
             <Button className="w-full justify-start" variant="outline">
               <Clock className="h-4 w-4 mr-2" />
-              My Subscriptions (B2B)
+              My Subscriptions
             </Button>
             <Button className="w-full justify-start" variant="outline">
               <TrendingUp className="h-4 w-4 mr-2" />
