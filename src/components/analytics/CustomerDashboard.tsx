@@ -188,12 +188,12 @@ export default function CustomerDashboard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Page Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Customer Dashboard</h2>
-          <p className="mt-1 text-sm text-gray-600">
+          <h2 className="text-2xl font-bold text-gray-900">Customer Dashboard</h2>
+          <p className="text-sm text-gray-600">
             Manage your subscriptions and view your billing information
           </p>
         </div>
@@ -210,7 +210,7 @@ export default function CustomerDashboard() {
       </div>
 
       {/* Customer Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Subscriptions</CardTitle>
@@ -265,7 +265,7 @@ export default function CustomerDashboard() {
       </div>
 
       {/* Subscriptions and Invoices */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card>
           <CardHeader>
             <CardTitle>My Subscriptions</CardTitle>
@@ -276,13 +276,13 @@ export default function CustomerDashboard() {
           <CardContent>
             <div className="space-y-4">
               {subscriptions.map((subscription) => (
-                <div key={subscription._id} className="flex items-center justify-between p-3 border rounded-lg">
+                <div key={subscription._id} className="flex items-center justify-between p-2 border rounded-lg">
                   <div className="flex-1">
                     <div className="flex items-center space-x-2">
-                      <h4 className="font-medium">{subscription.productName}</h4>
+                      <h4 className="font-medium text-sm">{subscription.productName}</h4>
                       {getStatusBadge(subscription.status)}
                     </div>
-                    <p className="text-sm text-gray-600">{subscription.description}</p>
+                    <p className="text-xs text-gray-600">{subscription.description}</p>
                     <div className="flex items-center space-x-4 mt-1">
                       <span className="text-sm font-medium">{formatCurrency(subscription.amount)}</span>
                       <span className="text-xs text-gray-500">{subscription.billingCycle}</span>
@@ -322,10 +322,10 @@ export default function CustomerDashboard() {
           <CardContent>
             <div className="space-y-4">
               {invoices.map((invoice) => (
-                <div key={invoice._id} className="flex items-center justify-between p-3 border rounded-lg">
+                <div key={invoice._id} className="flex items-center justify-between p-2 border rounded-lg">
                   <div className="flex-1">
                     <div className="flex items-center space-x-2">
-                      <h4 className="font-medium">{invoice.invoiceNumber}</h4>
+                      <h4 className="font-medium text-sm">{invoice.invoiceNumber}</h4>
                       {getStatusBadge(invoice.status)}
                     </div>
                     <div className="flex items-center space-x-4 mt-1">
@@ -367,7 +367,7 @@ export default function CustomerDashboard() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             <Button className="w-full justify-start" variant="outline">
               <Package className="h-4 w-4 mr-2" />
               Browse Products

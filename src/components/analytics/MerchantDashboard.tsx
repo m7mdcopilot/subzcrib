@@ -139,12 +139,12 @@ export default function MerchantDashboard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Page Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Merchant Dashboard</h2>
-          <p className="mt-1 text-sm text-gray-600">
+          <h2 className="text-2xl font-bold text-gray-900">Merchant Dashboard</h2>
+          <p className="text-sm text-gray-600">
             Manage your business, products, and customers
           </p>
         </div>
@@ -161,7 +161,7 @@ export default function MerchantDashboard() {
       </div>
 
       {/* Business Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Customers</CardTitle>
@@ -216,7 +216,7 @@ export default function MerchantDashboard() {
       </div>
 
       {/* Additional Business Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Subscriptions</CardTitle>
@@ -264,7 +264,7 @@ export default function MerchantDashboard() {
       </div>
 
       {/* Business Sections */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card>
           <CardHeader>
             <CardTitle>Recent Subscriptions</CardTitle>
@@ -275,13 +275,13 @@ export default function MerchantDashboard() {
           <CardContent>
             <div className="space-y-4">
               {recentSubscriptions.map((subscription) => (
-                <div key={subscription._id} className="flex items-center justify-between p-3 border rounded-lg">
+                <div key={subscription._id} className="flex items-center justify-between p-2 border rounded-lg">
                   <div className="flex-1">
                     <div className="flex items-center space-x-2">
-                      <h4 className="font-medium">{subscription.customerName}</h4>
+                      <h4 className="font-medium text-sm">{subscription.customerName}</h4>
                       {getStatusBadge(subscription.status)}
                     </div>
-                    <p className="text-sm text-gray-600">{subscription.productName}</p>
+                    <p className="text-xs text-gray-600">{subscription.productName}</p>
                     <div className="flex items-center space-x-4 mt-1">
                       <span className="text-sm font-medium">{formatCurrency(subscription.amount)}</span>
                       <span className="text-xs text-gray-500">{subscription.currency}</span>
@@ -308,7 +308,7 @@ export default function MerchantDashboard() {
               Quick access to business operations
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-3">
             <Button className="w-full justify-start" variant="outline">
               <Users className="h-4 w-4 mr-2" />
               Manage Customers

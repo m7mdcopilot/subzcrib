@@ -48,7 +48,7 @@ export default function DashboardPage() {
         <SidebarNav />
         
         <main className="flex-1 lg:ml-64 overflow-y-auto">
-          <div className="p-4 lg:p-8">
+          <div className="p-2 lg:p-4">
             {isPortalAdmin && <PortalAdminDashboard />}
             {isMerchant && <MerchantDashboard />}
             {isCustomer && <CustomerDashboard />}

@@ -137,12 +137,12 @@ export default function PortalAdminDashboard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Page Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Portal Admin Dashboard</h2>
-          <p className="mt-1 text-sm text-gray-600">
+          <h2 className="text-2xl font-bold text-gray-900">Portal Admin Dashboard</h2>
+          <p className="text-sm text-gray-600">
             Manage the entire subzcrib.com platform
           </p>
         </div>
@@ -153,7 +153,7 @@ export default function PortalAdminDashboard() {
       </div>
 
       {/* Platform Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Merchants</CardTitle>
@@ -214,7 +214,7 @@ export default function PortalAdminDashboard() {
       </div>
 
       {/* Additional Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Subscriptions</CardTitle>
@@ -256,7 +256,7 @@ export default function PortalAdminDashboard() {
       </div>
 
       {/* Merchant Management */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card>
           <CardHeader>
             <CardTitle>Recent Merchants</CardTitle>
@@ -267,13 +267,13 @@ export default function PortalAdminDashboard() {
           <CardContent>
             <div className="space-y-4">
               {merchants.map((merchant) => (
-                <div key={merchant._id} className="flex items-center justify-between p-3 border rounded-lg">
+                <div key={merchant._id} className="flex items-center justify-between p-2 border rounded-lg">
                   <div className="flex-1">
                     <div className="flex items-center space-x-2">
-                      <h4 className="font-medium">{merchant.name}</h4>
+                      <h4 className="font-medium text-sm">{merchant.name}</h4>
                       {getMerchantStatusBadge(merchant)}
                     </div>
-                    <p className="text-sm text-gray-600">{merchant.email}</p>
+                    <p className="text-xs text-gray-600">{merchant.email}</p>
                     <div className="flex items-center space-x-4 mt-1">
                       <span className="text-xs text-gray-500">{merchant.businessType}</span>
                       <span className="text-xs text-gray-500">{merchant.industry}</span>
@@ -300,7 +300,7 @@ export default function PortalAdminDashboard() {
               Common administrative tasks
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-3">
             <Button className="w-full justify-start" variant="outline">
               <Building2 className="h-4 w-4 mr-2" />
               View All Merchants
