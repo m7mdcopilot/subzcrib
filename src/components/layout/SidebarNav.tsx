@@ -212,64 +212,68 @@ export default function SidebarNav() {
   }
 
   return (
-    <div className="hidden w-64 bg-white/80 backdrop-blur-sm border-r border-gray-200 min-h-screen lg:block">
-      <div className="p-6 space-y-6">
+    <div className="hidden w-64 bg-white/80 backdrop-blur-sm border-r border-gray-200 min-h-screen lg:flex lg:flex-col">
+      <div className="flex flex-col h-full">
         {/* Logo */}
-        <div className="text-center">
-          <div className="flex justify-center mb-4">
-            <div className="relative">
-              <div className="absolute top-16 left-1 w-3 h-3 bg-blue-600 rounded-full animate-ping z-5" style={{ top: '35px', left: '0.15rem' }}></div>
-              <div className="h-12 w-auto flex items-center justify-center">
-                <div className="h-10 w-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">S</span>
+        <div className="p-6 border-b border-gray-200 flex-shrink-0">
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <div className="relative">
+                <div className="absolute top-16 left-1 w-3 h-3 bg-blue-600 rounded-full animate-ping z-5" style={{ top: '35px', left: '0.15rem' }}></div>
+                <div className="h-12 w-auto flex items-center justify-center">
+                  <div className="h-10 w-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">S</span>
+                  </div>
                 </div>
               </div>
             </div>
+            <h2 className="text-lg font-semibold text-gray-900">subzcrib.com</h2>
           </div>
-          <h2 className="text-lg font-semibold text-gray-900">subzcrib.com</h2>
         </div>
 
-        {/* Navigation */}
-        <nav className="space-y-2">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  'flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-200 cursor-pointer',
-                  isActive 
-                    ? 'bg-[#00234B] text-white' 
-                    : 'text-gray-700 hover:bg-gray-100'
-                )}
-              >
-                <item.icon className="h-4 w-4" />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm">{item.name}</span>
-                    {item.badge && (
-                      <Badge variant="destructive" className="h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-white text-red-600 border-red-200">
-                        {item.badge}
-                      </Badge>
+        {/* Scrollable Navigation */}
+        <div className="flex-1 overflow-y-auto p-6 sidebar-scrollbar">
+          <nav className="space-y-2">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    'flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-200 cursor-pointer',
+                    isActive 
+                      ? 'bg-[#00234B] text-white' 
+                      : 'text-gray-700 hover:bg-gray-100'
+                  )}
+                >
+                  <item.icon className="h-4 w-4 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm truncate">{item.name}</span>
+                      {item.badge && (
+                        <Badge variant="destructive" className="h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-white text-red-600 border-red-200 flex-shrink-0">
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </div>
+                    {item.description && (
+                      <p className={cn(
+                        "text-xs mt-1 truncate",
+                        isActive ? "text-gray-300" : "text-gray-500"
+                      )}>
+                        {item.description}
+                      </p>
                     )}
                   </div>
-                  {item.description && (
-                    <p className={cn(
-                      "text-xs mt-1",
-                      isActive ? "text-gray-300" : "text-gray-500"
-                    )}>
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-              </Link>
-            )
-          })}
-        </nav>
+                </Link>
+              )
+            })}
+          </nav>
+        </div>
 
-        {/* User Info */}
-        <div className="absolute bottom-6 left-6 right-6">
+        {/* Fixed User Info */}
+        <div className="p-6 border-t border-gray-200 flex-shrink-0">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
@@ -277,14 +281,14 @@ export default function SidebarNav() {
                 className="w-full p-3 h-auto bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 justify-start cursor-pointer"
               >
                 <div className="flex items-center gap-3 flex-1">
-                  <div className="w-8 h-8 bg-[#00234B] rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-[#00234B] rounded-full flex items-center justify-center flex-shrink-0">
                     <User className="h-4 w-4 text-white" />
                   </div>
                   <div className="flex-1 min-w-0 text-left">
                     <p className="text-sm font-medium text-gray-900 truncate">{user.name}</p>
                     <p className="text-xs text-gray-500 truncate">{getRoleDisplayName(user.role)}</p>
                   </div>
-                  <ChevronDown className="h-4 w-4 text-gray-400" />
+                  <ChevronDown className="h-4 w-4 text-gray-400 flex-shrink-0" />
                 </div>
               </Button>
             </DropdownMenuTrigger>
