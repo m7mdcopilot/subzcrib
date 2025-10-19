@@ -2,12 +2,16 @@ import Customer from './Customer'
 import Product from './Product'
 import Subscription from './Subscription'
 import Invoice from './Invoice'
+import User from './User'
+import Merchant from './Merchant'
 
 export {
   Customer,
   Product,
   Subscription,
-  Invoice
+  Invoice,
+  User,
+  Merchant
 }
 
 export type {
@@ -25,3 +29,11 @@ export type {
 export type {
   IInvoice
 } from './Invoice'
+
+export type {
+  IUser
+} from './User'
+
+export type {
+  IMerchant
+} from './Merchant'

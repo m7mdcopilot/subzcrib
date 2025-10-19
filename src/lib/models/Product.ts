@@ -7,6 +7,12 @@ export interface IProduct extends Document {
   currency: string
   billingCycle: 'monthly' | 'yearly' | 'weekly' | 'daily'
   features: string[]
+  merchantId: mongoose.Types.ObjectId // Reference to the merchant who owns this product
+  category?: string
+  tags?: string[]
+  images?: string[]
+  trialPeriod?: number // in days
+  setupFee?: number
   status: 'active' | 'inactive' | 'archived'
   createdAt: Date
   updatedAt: Date
@@ -42,6 +48,31 @@ const ProductSchema = new Schema<IProduct>({
   features: [{
     type: String
   }],
+  merchantId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Merchant',
+    required: [true, 'Product must belong to a merchant']
+  },
+  category: {
+    type: String,
+    trim: true
+  },
+  tags: [{
+    type: String,
+    trim: true
+  }],
+  images: [{
+    type: String
+  }],
+  trialPeriod: {
+    type: Number,
+    min: [0, 'Trial period must be a positive number']
+  },
+  setupFee: {
+    type: Number,
+    min: [0, 'Setup fee must be a positive number'],
+    default: 0
+  },
   status: {
     type: String,
     enum: ['active', 'inactive', 'archived'],
@@ -50,5 +81,12 @@ const ProductSchema = new Schema<IProduct>({
 }, {
   timestamps: true
 })
+
+// Indexes for performance
+ProductSchema.index({ name: 1 })
+ProductSchema.index({ merchantId: 1 })
+ProductSchema.index({ status: 1 })
+ProductSchema.index({ category: 1 })
+ProductSchema.index({ billingCycle: 1 })
 
 export default mongoose.models.Product || mongoose.model<IProduct>('Product', ProductSchema)

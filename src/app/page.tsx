@@ -1,276 +1,200 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useAuth } from '@/contexts/AuthContext'
 import { Button } from '@/components/ui/button'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { CreditCard, Users, TrendingUp, AlertCircle, Plus, Settings } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { SubscriptionList } from '@/components/subscriptions'
-import { AnalyticsDashboard } from '@/components/analytics'
-import { CustomerPortal } from '@/components/customer-portal'
-
-interface DashboardStats {
-  totalMRR: number
-  activeSubscriptions: number
-  totalCustomers: number
-  churnRate: number
-}
-
-interface RecentSubscription {
-  id: string
-  customerName: string
-  productName: string
-  status: string
-  amount: number
-  nextBillingDate: string
-}
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Building2, Users, TrendingUp, Shield } from 'lucide-react'
 
 export default function Home() {
-  const [stats, setStats] = useState<DashboardStats>({
-    totalMRR: 0,
-    activeSubscriptions: 0,
-    totalCustomers: 0,
-    churnRate: 0
-  })
-
-  const [recentSubscriptions, setRecentSubscriptions] = useState<RecentSubscription[]>([])
+  const { user, isLoading } = useAuth()
+  const router = useRouter()
 
   useEffect(() => {
-    // Mock data for now - will be replaced with API calls
-    setStats({
-      totalMRR: 15420,
-      activeSubscriptions: 142,
-      totalCustomers: 128,
-      churnRate: 3.2
-    })
+    if (!isLoading && user) {
+      router.push('/dashboard')
+    }
+  }, [user, isLoading, router])
 
-    setRecentSubscriptions([
-      {
-        id: '1',
-        customerName: 'John Doe',
-        productName: 'Pro Plan',
-        status: 'active',
-        amount: 99,
-        nextBillingDate: '2024-02-15'
-      },
-      {
-        id: '2',
-        customerName: 'Jane Smith',
-        productName: 'Business Plan',
-        status: 'active',
-        amount: 299,
-        nextBillingDate: '2024-02-20'
-      },
-      {
-        id: '3',
-        customerName: 'Bob Johnson',
-        productName: 'Starter Plan',
-        status: 'cancelled',
-        amount: 49,
-        nextBillingDate: '2024-01-30'
-      }
-    ])
-  }, [])
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(amount)
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+      </div>
+    )
   }
 
-  const getStatusBadge = (status: string) => {
-    const variants: Record<string, 'default' | 'secondary' | 'destructive'> = {
-      active: 'default',
-      cancelled: 'destructive',
-      expired: 'secondary',
-      paused: 'secondary'
-    }
-    return <Badge variant={variants[status] || 'default'}>{status}</Badge>
+  if (user) {
+    return null // Will redirect to dashboard
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
-      <header className="border-b">
+      <header className="border-b bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="relative w-8 h-8">
-              <img
-                src="/logo.svg"
-                alt="subzcrib.com"
-                className="w-full h-full object-contain"
-              />
+              <div className="w-full h-full bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">S</span>
+              </div>
             </div>
-            <h1 className="text-2xl font-bold">subzcrib.com</h1>
+            <h1 className="text-2xl font-bold text-gray-900">subzcrib.com</h1>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              <Settings className="w-4 h-4 mr-2" />
-              Settings
+            <Button variant="outline" onClick={() => router.push('/login')}>
+              Sign In
+            </Button>
+            <Button onClick={() => router.push('/register')}>
+              Get Started
             </Button>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-2">Subscription Dashboard</h2>
-          <p className="text-muted-foreground">
-            Manage your recurring revenue and track key business metrics
+      {/* Hero Section */}
+      <main className="container mx-auto px-4 py-16">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">
+            Modern Subscription Management
+            <span className="text-blue-600"> for Every Business</span>
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            subzcrib.com provides a complete subscription management platform with role-based dashboards, 
+            powerful analytics, and seamless customer experiences.
           </p>
+          <div className="flex justify-center space-x-4">
+            <Button size="lg" onClick={() => router.push('/register')}>
+              Start Free Trial
+            </Button>
+            <Button size="lg" variant="outline" onClick={() => router.push('/login')}>
+              Sign In
+            </Button>
+          </div>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Monthly Recurring Revenue</CardTitle>
-              <CreditCard className="h-4 w-4 text-muted-foreground" />
+        {/* Features */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <Card className="text-center">
+            <CardHeader>
+              <Building2 className="h-8 w-8 mx-auto text-blue-600 mb-2" />
+              <CardTitle className="text-lg">Portal Admin</CardTitle>
+              <CardDescription>
+                Manage the entire platform with comprehensive analytics and merchant oversight
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{formatCurrency(stats.totalMRR)}</div>
-              <p className="text-xs text-muted-foreground">
-                +12% from last month
-              </p>
-            </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Subscriptions</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+          <Card className="text-center">
+            <CardHeader>
+              <Users className="h-8 w-8 mx-auto text-green-600 mb-2" />
+              <CardTitle className="text-lg">Merchant</CardTitle>
+              <CardDescription>
+                Run your business with customer management, products, and revenue tracking
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.activeSubscriptions}</div>
-              <p className="text-xs text-muted-foreground">
-                +8 new this week
-              </p>
-            </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Customers</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+          <Card className="text-center">
+            <CardHeader>
+              <TrendingUp className="h-8 w-8 mx-auto text-purple-600 mb-2" />
+              <CardTitle className="text-lg">Customer</CardTitle>
+              <CardDescription>
+                Manage subscriptions, view invoices, and access self-service features
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.totalCustomers}</div>
-              <p className="text-xs text-muted-foreground">
-                +5 new this month
-              </p>
-            </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Churn Rate</CardTitle>
-              <AlertCircle className="h-4 w-4 text-muted-foreground" />
+          <Card className="text-center">
+            <CardHeader>
+              <Shield className="h-8 w-8 mx-auto text-red-600 mb-2" />
+              <CardTitle className="text-lg">Secure</CardTitle>
+              <CardDescription>
+                Enterprise-grade security with role-based access and data isolation
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.churnRate}%</div>
-              <p className="text-xs text-muted-foreground">
-                -0.8% from last month
-              </p>
-            </CardContent>
           </Card>
         </div>
 
-        {/* Tabs */}
-        <Tabs defaultValue="overview" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="subscriptions">Subscriptions</TabsTrigger>
-            <TabsTrigger value="customers">Customers</TabsTrigger>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="overview" className="space-y-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Recent Subscriptions */}
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle>Recent Subscriptions</CardTitle>
-                    <Button size="sm">
-                      <Plus className="w-4 h-4 mr-2" />
-                      Add Subscription
-                    </Button>
-                  </div>
-                  <CardDescription>
-                    Latest subscription activity
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Customer</TableHead>
-                        <TableHead>Product</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Amount</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {recentSubscriptions.map((subscription) => (
-                        <TableRow key={subscription.id}>
-                          <TableCell className="font-medium">{subscription.customerName}</TableCell>
-                          <TableCell>{subscription.productName}</TableCell>
-                          <TableCell>{getStatusBadge(subscription.status)}</TableCell>
-                          <TableCell>{formatCurrency(subscription.amount)}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-
-              {/* Quick Actions */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quick Actions</CardTitle>
-                  <CardDescription>
-                    Common tasks for subscription management
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <Button className="w-full justify-start" variant="outline">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create New Subscription
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <Users className="w-4 h-4 mr-2" />
-                    Add New Customer
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <CreditCard className="w-4 h-4 mr-2" />
-                    Generate Invoices
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <TrendingUp className="w-4 h-4 mr-2" />
-                    View Analytics
-                  </Button>
-                </CardContent>
-              </Card>
+        {/* Role-based Dashboard Preview */}
+        <div className="bg-white rounded-2xl shadow-xl p-8 mb-16">
+          <h3 className="text-3xl font-bold text-center mb-8">Role-Based Dashboards</h3>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="bg-blue-50 rounded-lg p-6 mb-4">
+                <h4 className="text-xl font-semibold text-blue-900 mb-2">Portal Admin</h4>
+                <ul className="text-left text-blue-800 space-y-2">
+                  <li>• Platform analytics & metrics</li>
+                  <li>• Merchant management</li>
+                  <li>• B2B subscriptions</li>
+                  <li>• Merchant invoicing</li>
+                  <li>• Staff management</li>
+                </ul>
+              </div>
+              <Button variant="outline" className="w-full">
+                Admin Demo
+              </Button>
             </div>
-          </TabsContent>
 
-          <TabsContent value="subscriptions">
-            <SubscriptionList />
-          </TabsContent>
+            <div className="text-center">
+              <div className="bg-green-50 rounded-lg p-6 mb-4">
+                <h4 className="text-xl font-semibold text-green-900 mb-2">Merchant</h4>
+                <ul className="text-left text-green-800 space-y-2">
+                  <li>• Business analytics</li>
+                  <li>• B2B subscriptions</li>
+                  <li>• Customer management</li>
+                  <li>• Product catalog</li>
+                  <li>• Team management</li>
+                </ul>
+              </div>
+              <Button variant="outline" className="w-full">
+                Merchant Demo
+              </Button>
+            </div>
 
-          <TabsContent value="customers">
-            <CustomerPortal />
-          </TabsContent>
+            <div className="text-center">
+              <div className="bg-purple-50 rounded-lg p-6 mb-4">
+                <h4 className="text-xl font-semibold text-purple-900 mb-2">Customer</h4>
+                <ul className="text-left text-purple-800 space-y-2">
+                  <li>• Subscription usage</li>
+                  <li>• Personal subscriptions</li>
+                  <li>• Invoice access</li>
+                  <li>• Account settings</li>
+                  <li>• Payment methods</li>
+                </ul>
+              </div>
+              <Button variant="outline" className="w-full">
+                Customer Demo
+              </Button>
+            </div>
+          </div>
+        </div>
 
-          <TabsContent value="analytics">
-            <AnalyticsDashboard />
-          </TabsContent>
-        </Tabs>
+        {/* CTA Section */}
+        <div className="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white">
+          <h3 className="text-3xl font-bold mb-4">Ready to Transform Your Subscription Business?</h3>
+          <p className="text-xl mb-8 opacity-90">
+            Join thousands of businesses using subzcrib.com to manage their recurring revenue.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <Button size="lg" variant="secondary" onClick={() => router.push('/register')}>
+              Get Started Free
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600" onClick={() => router.push('/login')}>
+              Sign In to Account
+            </Button>
+          </div>
+        </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p>&copy; 2024 subzcrib.com. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   )
 }
