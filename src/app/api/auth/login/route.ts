@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find user by email
-    const user = await User.findOne({ email, isActive: true })
+    const user = await User.findOne({ email, isActive: true }) as any
     
     if (!user) {
       return NextResponse.json(

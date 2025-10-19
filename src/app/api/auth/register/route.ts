@@ -68,11 +68,11 @@ export async function POST(request: NextRequest) {
 
     // Create auth response
     const authUser = {
-      id: user._id.toString(),
+      id: (user as any)._id.toString(),
       email: user.email,
       name: user.name,
       role: user.role,
-      merchantId: user.merchantId?.toString()
+      merchantId: (user as any).merchantId?.toString()
     }
 
     return createAuthResponse(authUser)

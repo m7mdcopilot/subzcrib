@@ -16,6 +16,7 @@ export interface AuthUser {
 export interface DecodedToken {
   userId: string
   email: string
+  name: string
   role: string
   merchantId?: string
   customerId?: string
@@ -28,6 +29,7 @@ export function createToken(user: AuthUser): string {
   const payload = {
     userId: user.id,
     email: user.email,
+    name: user.name,
     role: user.role,
     merchantId: user.merchantId,
     customerId: user.customerId
@@ -63,6 +65,7 @@ export async function getUserFromRequest(request: NextRequest): Promise<AuthUser
     return {
       id: decoded.userId,
       email: decoded.email,
+      name: decoded.name,
       role: decoded.role as 'PORTAL_ADMIN' | 'MERCHANT' | 'CUSTOMER',
       merchantId: decoded.merchantId,
       customerId: decoded.customerId
